@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRodijnen — Ambachtelijk Desembrood uit Nijmegen & Ravenstein</title>
+  <meta name="description" content="Desembakkerij BRodijnen bakt dagelijks ambachtelijk desembrood zonder broodverbetermiddelen. Winkels in Nijmegen en Ravenstein.">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://analytics.code-lieshout.nl/script.js" data-website-id="0643bb7f-b319-4101-8ca1-811400d356be"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cabin:wght@400;500;600;700&display=swap');
+    
+    html { scroll-behavior: smooth; }
+    
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(120, 53, 15, 0.85) 0%, rgba(146, 64, 14, 0.6) 50%, rgba(180, 83, 9, 0.4) 100%);
+    }
+    
+    .grain {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+    
+    .block-hover {
+      transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+    }
+    .block-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(120, 53, 15, 0.15);
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0,0,0,0.9);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-height: 90vh; max-width: 90vw; object-fit: contain; border-radius: 8px; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 20px;
+      color: white; font-size: 32px; cursor: pointer;
+      width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand': { 50: '#FEF3C7', 100: '#FDE68A', 200: '#FCD34D', 300: '#d4b73f', 400: '#B45309', 500: '#92400E', 600: '#78350F', 700: '#451a03' },
+            'cream': '#FEF3C7',
+            'warm': '#FFFBEB',
+          },
+          fontFamily: {
+            display: ['Amatic SC', 'cursive'],
+            body: ['Cabin', 'sans-serif'],
+          },
+          gap: { '12': '48px', '16': '64px' },
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-body text-brand-600 bg-warm grain">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-brand-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/logo-main.png" alt="BRodijnen logo" class="h-10 md:h-14">
+      </a>
+      <div class="hidden md:flex items-center gap-8 font-body font-medium text-sm">
+        <a href="index.html" class="text-brand-500 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Home</a>
+        <a href="over-ons.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Over Ons</a>
+        <a href="molen-horeca.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Molen & Horeca</a>
+        <a href="galerij.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Galerij</a>
+        <a href="contact.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Contact</a>
+        <a href="https://www.brodijnen.nl/webshop/" target="_blank" class="bg-brand-500 text-white px-5 py-2.5 rounded-lg hover:bg-brand-400 transition-colors duration-200 cursor-pointer font-semibold">Bestel Online</a>
+      </div>
+      <!-- Mobile menu button -->
+      <button id="menuBtn" class="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer" aria-label="Menu">
+        <svg class="w-7 h-7 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobileMenu" class="fixed inset-0 z-[60] bg-brand-600/95 backdrop-blur-lg hidden flex-col items-center justify-center gap-8">
+    <button id="menuClose" class="absolute top-5 right-5 min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer">
+      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <a href="index.html" class="font-display text-4xl text-white hover:text-brand-200 transition-colors duration-200 cursor-pointer">Home</a>
+    <a href="over-ons.html" class="font-display text-4xl text-white hover:text-brand-200 transition-colors duration-200 cursor-pointer">Over Ons</a>
+    <a href="molen-horeca.html" class="font-display text-4xl text-white hover:text-brand-200 transition-colors duration-200 cursor-pointer">Molen & Horeca</a>
+    <a href="galerij.html" class="font-display text-4xl text-white hover:text-brand-200 transition-colors duration-200 cursor-pointer">Galerij</a>
+    <a href="contact.html" class="font-display text-4xl text-white hover:text-brand-200 transition-colors duration-200 cursor-pointer">Contact</a>
+    <a href="https://www.brodijnen.nl/webshop/" target="_blank" class="mt-4 bg-brand-200 text-brand-700 px-8 py-3 rounded-lg font-body font-bold text-lg cursor-pointer">Bestel Online</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <img src="images/hero-bread.jpg" alt="Vers gebakken desembrood" class="absolute inset-0 w-full h-full object-cover">
+    <div class="hero-overlay absolute inset-0"></div>
+    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+      <h1 class="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6 leading-tight">
+        Desembrood<br><span class="text-brand-200">Dagelijks Vers</span>
+      </h1>
+      <p class="font-body text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed">
+        Ambachtelijk desembrood zonder kunstmatige toevoegingen. Gebakken met liefde, meel van molens en 24 uur geduld.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://www.brodijnen.nl/webshop/" target="_blank" class="bg-brand-300 text-brand-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-brand-200 transition-colors duration-200 cursor-pointer inline-flex items-center justify-center gap-2 min-h-[44px]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+          Bestel Online
+        </a>
+        <a href="contact.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-colors duration-200 cursor-pointer inline-flex items-center justify-center min-h-[44px]">
+          Bezoek Onze Winkel
+        </a>
+      </div>
+    </div>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  </section>
+
+  <!-- Value Props / Stats -->
+  <section class="bg-brand-500 py-6">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center">
+      <div class="py-4">
+        <p class="font-display text-5xl md:text-6xl font-bold text-brand-200">24u</p>
+        <p class="font-body text-sm text-white/80 mt-1">Rijstijd</p>
+      </div>
+      <div class="py-4">
+        <p class="font-display text-5xl md:text-6xl font-bold text-brand-200">100%</p>
+        <p class="font-body text-sm text-white/80 mt-1">Natuurlijk</p>
+      </div>
+      <div class="py-4">
+        <p class="font-display text-5xl md:text-6xl font-bold text-brand-200">2</p>
+        <p class="font-body text-sm text-white/80 mt-1">Locaties</p>
+      </div>
+      <div class="py-4">
+        <p class="font-display text-5xl md:text-6xl font-bold text-brand-200">⭐ 4.8</p>
+        <p class="font-body text-sm text-white/80 mt-1">Google Reviews</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Waarom Desembrood -->
+  <section class="py-20 md:py-28 bg-warm grain">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="font-display text-5xl md:text-7xl font-bold text-brand-600 mb-4">Waarom Desembrood</h2>
+        <p class="font-body text-lg text-brand-500/80 max-w-2xl mx-auto">Wij bakken dagelijks jouw desembrood, volgens beproefd recept en alleen met verse ingrediënten. En dat proef je…natuurlijk!</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div class="bg-white rounded-xl p-8 block-hover fade-in text-center">
+          <div class="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Langzame Rijstijd</h3>
+          <p class="font-body text-brand-500/80 text-sm leading-relaxed">Onze broden krijgen de tijd die ze nodig hebben, met een rijstijd van ongeveer 24 uur. Dit zorgt voor een diepere smaak en een luchtige textuur.</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 block-hover fade-in text-center">
+          <div class="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/></svg>
+          </div>
+          <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Bakken op Steen</h3>
+          <p class="font-body text-brand-500/80 text-sm leading-relaxed">Net als vroeger bakken we ons brood direct op de stenen vloer van de oven. Dit geeft een knapperige korst en een rijke, volle smaak.</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 block-hover fade-in text-center">
+          <div class="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+          </div>
+          <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Natuurlijke Ingrediënten</h3>
+          <p class="font-body text-brand-500/80 text-sm leading-relaxed">We maken gebruik van biologische granen en kiezen ingrediënten zorgvuldig uit. Werken samen met lokale partijen om een puur en eerlijk product op tafel te zetten.</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 block-hover fade-in text-center">
+          <div class="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          </div>
+          <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Dagverse Productie</h3>
+          <p class="font-body text-brand-500/80 text-sm leading-relaxed">Elke dag vers gebakken in onze eigen bakkerij, zodat je altijd kunt genieten van de hoogste kwaliteit en versheid.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Over Erik -->
+  <section class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="fade-in">
+          <img src="images/erik-portrait.jpg" alt="Erik van Rodijnen, bakker en oprichter van BRodijnen" class="rounded-2xl w-full object-cover shadow-lg" loading="lazy">
+        </div>
+        <div class="fade-in">
+          <p class="font-body text-sm font-semibold text-brand-400 uppercase tracking-widest mb-3">De Bakker</p>
+          <h2 class="font-display text-5xl md:text-7xl font-bold text-brand-600 mb-6">Erik van Rodijnen</h2>
+          <p class="font-body text-brand-500/80 leading-relaxed mb-4">
+            Voormalig Kloosterbakker, opgegroeid met de geur van versgebakken brood. Erik combineert traditionele technieken met moderne inzichten om brood te creëren dat zowel authentiek als innovatief is.
+          </p>
+          <p class="font-body text-brand-500/80 leading-relaxed mb-6">
+            Ingrediënten van hoge kwaliteit, bloem en meel gemalen zoals het hoort: in Molens. Het Klooster verlaten voor de grote stad Nijmegen, en sinds 2025 ook in de buik van molen de Nijverheid in Ravenstein.
+          </p>
+          <a href="over-ons.html" class="inline-flex items-center gap-2 text-brand-500 font-semibold hover:text-brand-300 transition-colors duration-200 cursor-pointer">
+            Lees het hele verhaal
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Onze Locaties -->
+  <section class="py-20 md:py-28 bg-cream grain">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="font-display text-5xl md:text-7xl font-bold text-brand-600 mb-4">Twee Locaties</h2>
+        <p class="font-body text-lg text-brand-500/80">Bezoek ons in Nijmegen of Ravenstein</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Nijmegen -->
+        <div class="bg-white rounded-2xl overflow-hidden block-hover fade-in">
+          <img src="images/google/google_place_1.jpg" alt="BRodijnen winkel Nijmegen" class="w-full h-64 object-cover" loading="lazy">
+          <div class="p-8">
+            <h3 class="font-display text-4xl font-bold text-brand-600 mb-2">Nijmegen</h3>
+            <p class="font-body text-brand-500/70 mb-4">Lange Hezelstraat 31, 6511 CB Nijmegen</p>
+            <div class="space-y-2 text-sm font-body text-brand-500/80">
+              <p><span class="font-semibold">Open:</span> Wo – Za: 09:00 – 16:00</p>
+              <p><span class="font-semibold">Telefoon:</span> 06 23 95 49 90</p>
+            </div>
+            <a href="https://maps.google.com/?cid=3966257113649371436" target="_blank" class="mt-6 inline-flex items-center gap-2 bg-brand-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-400 transition-colors duration-200 cursor-pointer min-h-[44px]">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              Routebeschrijving
+            </a>
+          </div>
+        </div>
+        <!-- Ravenstein -->
+        <div class="bg-white rounded-2xl overflow-hidden block-hover fade-in">
+          <img src="images/molen-exterior.jpg" alt="Molen de Nijverheid Ravenstein" class="w-full h-64 object-cover" loading="lazy">
+          <div class="p-8">
+            <h3 class="font-display text-4xl font-bold text-brand-600 mb-2">Ravenstein</h3>
+            <p class="font-body text-brand-500/70 mb-4">Molensingel 6, 5371 AW Ravenstein</p>
+            <div class="space-y-2 text-sm font-body text-brand-500/80">
+              <p><span class="font-semibold">Open:</span> Wo – Za: 10:00 – 16:00 | Zo: 09:00 – 18:00</p>
+              <p><span class="font-semibold">Telefoon:</span> 06 53 47 25 05</p>
+            </div>
+            <a href="https://g.co/kgs/1h2myiz" target="_blank" class="mt-6 inline-flex items-center gap-2 bg-brand-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-400 transition-colors duration-200 cursor-pointer min-h-[44px]">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              Routebeschrijving
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews / Social Proof -->
+  <section class="py-20 md:py-28 bg-brand-600">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="font-display text-5xl md:text-7xl font-bold text-white mb-4">Wat Klanten Zeggen</h2>
+        <p class="font-body text-lg text-white/70">⭐ 4.8/5 op Google (54 reviews)</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 fade-in">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="font-body text-white/90 italic mb-4 leading-relaxed">"Een echte aanrader, je proeft dat de zuurdesembroden met liefde gebakken worden volgens oud vakmanschap. Lof ook voor het personeel, altijd beleefd."</p>
+          <p class="font-body text-brand-200 font-semibold text-sm">S. Schumann</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 fade-in">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="font-body text-white/90 italic mb-4 leading-relaxed">"Wat heb ik weer lekker geluncht met een brood en krentenbollen van BRodijnen. Ga zo door! Ik fiets er speciaal voor naar Nijmegen."</p>
+          <p class="font-body text-brand-200 font-semibold text-sm">M. van Oostendorp</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 fade-in">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="font-body text-white/90 italic mb-4 leading-relaxed">"Really good breads and tasty treats. Favourite bakery in town. I'm a big fan of the kurkuma bread with raisins. Prices are super fair."</p>
+          <p class="font-body text-brand-200 font-semibold text-sm">M. Oostdijk</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galerij Preview -->
+  <section class="py-20 md:py-28 bg-warm grain">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="font-display text-5xl md:text-7xl font-bold text-brand-600 mb-4">Sfeerimpressie</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="aspect-square overflow-hidden rounded-xl cursor-pointer gallery-img" onclick="openLightbox(this)">
+          <img src="images/bakery-action1.jpg" alt="Brood bakken" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+        </div>
+        <div class="aspect-square overflow-hidden rounded-xl cursor-pointer gallery-img" onclick="openLightbox(this)">
+          <img src="images/bakery-action2.jpg" alt="In de bakkerij" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+        </div>
+        <div class="aspect-square overflow-hidden rounded-xl cursor-pointer gallery-img" onclick="openLightbox(this)">
+          <img src="images/molen-interior1.jpg" alt="Molen interieur" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+        </div>
+        <div class="aspect-square overflow-hidden rounded-xl cursor-pointer gallery-img" onclick="openLightbox(this)">
+          <img src="images/google/google_place_2.jpg" alt="BRodijnen producten" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+        </div>
+        <div class="aspect-square overflow-hidden rounded-xl cursor-pointer gallery-img" onclick="openLightbox(this)">
+          <img src="images/molen-scene.jpg" alt="Molen scene" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+        </div>
+        <div class="aspect-square overflow-hidden rounded-xl cursor-pointer gallery-img" onclick="openLightbox(this)">
+          <img src="images/baking1.jpg" alt="Vers brood" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+        </div>
+        <div class="aspect-square overflow-hidden rounded-xl cursor-pointer gallery-img md:col-span-1 lg:col-span-2" onclick="openLightbox(this)">
+          <img src="images/molen-panorama.jpg" alt="Molen panorama" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+        </div>
+      </div>
+      <div class="text-center mt-10 fade-in">
+        <a href="galerij.html" class="inline-flex items-center gap-2 bg-brand-500 text-white px-8 py-4 rounded-lg font-bold hover:bg-brand-400 transition-colors duration-200 cursor-pointer min-h-[44px]">
+          Bekijk Alle Foto's
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 md:py-28 bg-brand-500 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 text-center relative z-10 fade-in">
+      <h2 class="font-display text-5xl md:text-7xl font-bold text-white mb-6">Proef het Verschil</h2>
+      <p class="font-body text-lg text-white/80 max-w-2xl mx-auto mb-10">Bestel online en haal af in Nijmegen of Ravenstein, of kom langs en ervaar de geur van vers gebakken desembrood.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://www.brodijnen.nl/webshop/" target="_blank" class="bg-brand-200 text-brand-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-brand-100 transition-colors duration-200 cursor-pointer min-h-[44px]">Bestel Online</a>
+        <a href="contact.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-colors duration-200 cursor-pointer min-h-[44px]">Neem Contact Op</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brand-700 py-16">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-12">
+        <div>
+          <img src="images/logo-main.png" alt="BRodijnen" class="h-16 mb-4 brightness-200">
+          <p class="font-body text-white/60 text-sm leading-relaxed">Ambachtelijk desembrood, dagelijks vers gebakken met liefde en geduld.</p>
+        </div>
+        <div>
+          <h4 class="font-display text-2xl font-bold text-white mb-4">Pagina's</h4>
+          <ul class="space-y-2 font-body text-sm text-white/60">
+            <li><a href="over-ons.html" class="hover:text-white transition-colors duration-200 cursor-pointer">Over Ons</a></li>
+            <li><a href="molen-horeca.html" class="hover:text-white transition-colors duration-200 cursor-pointer">Molen & Horeca</a></li>
+            <li><a href="galerij.html" class="hover:text-white transition-colors duration-200 cursor-pointer">Galerij</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors duration-200 cursor-pointer">Contact</a></li>
+            <li><a href="https://www.brodijnen.nl/webshop/" target="_blank" class="hover:text-white transition-colors duration-200 cursor-pointer">Webshop</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display text-2xl font-bold text-white mb-4">Nijmegen</h4>
+          <ul class="space-y-2 font-body text-sm text-white/60">
+            <li>Lange Hezelstraat 31</li>
+            <li>6511 CB Nijmegen</li>
+            <li>06 23 95 49 90</li>
+            <li>Wo – Za: 09:00 – 16:00</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display text-2xl font-bold text-white mb-4">Ravenstein</h4>
+          <ul class="space-y-2 font-body text-sm text-white/60">
+            <li>Molensingel 6</li>
+            <li>5371 AW Ravenstein</li>
+            <li>06 53 47 25 05</li>
+            <li>Wo – Za: 10:00 – 16:00</li>
+            <li>Zo: 09:00 – 18:00</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="font-body text-white/40 text-sm">© 2026 BRodijnen. Alle rechten voorbehouden.</p>
+        <div class="flex items-center gap-4">
+          <a href="https://www.instagram.com/brodijnen/" target="_blank" class="text-white/40 hover:text-white transition-colors duration-200 cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="mailto:info@brodijnen.nl" class="text-white/40 hover:text-white transition-colors duration-200 cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </a>
+        </div>
+        <p class="font-body text-white/30 text-xs">Gebouwd door <a href="https://www.code-lieshout.nl" class="hover:text-white/60 transition-colors duration-200 cursor-pointer">Code Lieshout</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    // Mobile menu
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('hidden');
+      document.getElementById('mobileMenu').classList.add('flex');
+    });
+    document.getElementById('menuClose').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.add('hidden');
+      document.getElementById('mobileMenu').classList.remove('flex');
+    });
+
+    // Fade in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Lightbox
+    function openLightbox(el) {
+      const img = el.querySelector('img');
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+</body>
+</html>

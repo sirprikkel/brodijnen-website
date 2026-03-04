@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Over Ons — BRodijnen</title>
+  <meta name="description" content="Het verhaal van Erik van Rodijnen en BRodijnen. Van kloosterbakker tot ambachtelijke desembakkerij in Nijmegen en Ravenstein.">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://analytics.code-lieshout.nl/script.js" data-website-id="0643bb7f-b319-4101-8ca1-811400d356be"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cabin:wght@400;500;600;700&display=swap');
+    html { scroll-behavior: smooth; }
+    .grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { 'brand': { 50: '#FEF3C7', 100: '#FDE68A', 200: '#FCD34D', 300: '#d4b73f', 400: '#B45309', 500: '#92400E', 600: '#78350F', 700: '#451a03' }, 'cream': '#FEF3C7', 'warm': '#FFFBEB' },
+        fontFamily: { display: ['Amatic SC', 'cursive'], body: ['Cabin', 'sans-serif'] }
+      }}
+    }
+  </script>
+</head>
+<body class="font-body text-brand-600 bg-warm grain">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-brand-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
+      <a href="index.html" class="flex items-center gap-3"><img src="images/logo-main.png" alt="BRodijnen logo" class="h-10 md:h-14"></a>
+      <div class="hidden md:flex items-center gap-8 font-body font-medium text-sm">
+        <a href="index.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Home</a>
+        <a href="over-ons.html" class="text-brand-500 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Over Ons</a>
+        <a href="molen-horeca.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Molen & Horeca</a>
+        <a href="galerij.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Galerij</a>
+        <a href="contact.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Contact</a>
+        <a href="https://www.brodijnen.nl/webshop/" target="_blank" class="bg-brand-500 text-white px-5 py-2.5 rounded-lg hover:bg-brand-400 transition-colors duration-200 cursor-pointer font-semibold">Bestel Online</a>
+      </div>
+      <button id="menuBtn" class="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer" aria-label="Menu">
+        <svg class="w-7 h-7 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div id="mobileMenu" class="fixed inset-0 z-[60] bg-brand-600/95 backdrop-blur-lg hidden flex-col items-center justify-center gap-8">
+    <button id="menuClose" class="absolute top-5 right-5 min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    <a href="index.html" class="font-display text-4xl text-white hover:text-brand-200 transition-colors duration-200 cursor-pointer">Home</a>
+    <a href="over-ons.html" class="font-display text-4xl text-white hover:text-brand-200 transition-colors duration-200 cursor-pointer">Over Ons</a>
+    <a href="molen-horeca.html" class="font-display text-4xl text-white hover:text-brand-200 transition-colors duration-200 cursor-pointer">Molen & Horeca</a>
+    <a href="galerij.html" class="font-display text-4xl text-white hover:text-brand-200 transition-colors duration-200 cursor-pointer">Galerij</a>
+    <a href="contact.html" class="font-display text-4xl text-white hover:text-brand-200 transition-colors duration-200 cursor-pointer">Contact</a>
+    <a href="https://www.brodijnen.nl/webshop/" target="_blank" class="mt-4 bg-brand-200 text-brand-700 px-8 py-3 rounded-lg font-body font-bold text-lg cursor-pointer">Bestel Online</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="pt-24 md:pt-32 pb-16 bg-brand-500">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 text-center">
+      <h1 class="font-display text-6xl md:text-8xl font-bold text-white mb-4">Het Verhaal van BRodijnen</h1>
+      <p class="font-body text-lg text-white/80 max-w-2xl mx-auto">Bij BRodijnen draait alles om de eenvoud van het bakken. Simpel maar niet makkelijk.</p>
+    </div>
+  </section>
+
+  <!-- Erik's Story -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div class="fade-in sticky top-24">
+          <img src="images/erik-portrait.jpg" alt="Erik van Rodijnen" class="rounded-2xl w-full shadow-lg" loading="lazy">
+          <div class="mt-6 bg-brand-50 rounded-xl p-6">
+            <p class="font-display text-3xl font-bold text-brand-600">Erik van Rodijnen</p>
+            <p class="font-body text-brand-500/70 mt-1">Oprichter & Bakker</p>
+          </div>
+        </div>
+        <div class="space-y-8 fade-in">
+          <p class="font-body text-lg text-brand-500/80 leading-relaxed">
+            Erik van Rodijnen, voormalig Kloosterbakker opgegroeid met de geur van versgebakken brood, heeft zijn vakmanschap herpakt in het oudste Kapucijnenklooster van Nederland. Erik combineert traditionele technieken met moderne inzichten om brood te creëren dat zowel authentiek als innovatief is.
+          </p>
+          <p class="font-body text-lg text-brand-500/80 leading-relaxed">
+            Ingrediënten van hoge kwaliteit, bloem en meel gemalen zoals het hoort: In Molens. Het Klooster verlaten voor de grote stad: Nijmegen, en sinds 2025 ook in de buik van molen de Nijverheid in Ravenstein. Waar er een tweede passie weer opnieuw is gaan branden, koken.
+          </p>
+
+          <!-- Timeline -->
+          <div class="space-y-12 mt-12">
+            <h3 class="font-display text-4xl font-bold text-brand-600">De Reis van Erik</h3>
+
+            <div class="flex gap-6">
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 bg-brand-500 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0">96</div>
+                <div class="w-0.5 bg-brand-200 flex-1 mt-2"></div>
+              </div>
+              <div class="pb-8">
+                <h4 class="font-display text-2xl font-bold text-brand-600">De Eerste Stappen</h4>
+                <p class="font-body text-brand-500/80 mt-2">Met een Oom als bakker, raakte Erik al vroeg besmet met het zogeheten Bakkers Virus. Met Vader en Moeder mee brood halen, wist hij al vroeg wat hij wilde.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-6">
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 bg-brand-500 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0">07</div>
+                <div class="w-0.5 bg-brand-200 flex-1 mt-2"></div>
+              </div>
+              <div class="pb-8">
+                <h4 class="font-display text-2xl font-bold text-brand-600">Eerste Stage</h4>
+                <p class="font-body text-brand-500/80 mt-2">School was niet zijn ding — hij wilde bakker worden. Een eerste snuffelstage bij de lokale bakker in Wijchen, niet veel later als vakantiewerk.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-6">
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 bg-brand-500 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0">09</div>
+                <div class="w-0.5 bg-brand-200 flex-1 mt-2"></div>
+              </div>
+              <div class="pb-8">
+                <h4 class="font-display text-2xl font-bold text-brand-600">De Wisseltruc</h4>
+                <p class="font-body text-brand-500/80 mt-2">Op advies van zijn oom eerst gekozen voor de Horeca als kok. 7 jaar later keerde hij alsnog terug het bakkersvak in, bij zijn oom.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-6">
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 bg-brand-300 rounded-full flex items-center justify-center text-brand-700 font-bold text-sm shrink-0">20</div>
+              </div>
+              <div>
+                <h4 class="font-display text-2xl font-bold text-brand-600">Oprichting van BRodijnen</h4>
+                <p class="font-body text-brand-500/80 mt-2">Na een persoonlijk turbulente tijd startte Erik in 2020 BRodijnen, op een terrasje in Alkmaar. Kwam bij het Kapucijnenklooster en startte BRodijnen in de voormalige bakkerij van de Kapucijnen.</p>
+                <p class="font-body text-brand-500/70 italic mt-3">"De kunst van koken is het weglaten"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Het Proces -->
+  <section class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="font-display text-5xl md:text-7xl font-bold text-brand-600 mb-4">Het Bakproces</h2>
+        <p class="font-body text-lg text-brand-500/80">Ontdek hoe ons desembrood tot stand komt</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-12">
+        <div class="text-center fade-in">
+          <div class="w-20 h-20 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span class="font-display text-4xl font-bold text-brand-500">1</span>
+          </div>
+          <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Ingrediënten Selecteren</h3>
+          <p class="font-body text-brand-500/80">We gaan opzoek naar lokale molens, proberen meel en bloemsoorten uit. Na deze testfase maken we een keuze om zo ons beste brood te kunnen bakken.</p>
+        </div>
+        <div class="text-center fade-in">
+          <div class="w-20 h-20 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span class="font-display text-4xl font-bold text-brand-500">2</span>
+          </div>
+          <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Meng en Kneed</h3>
+          <p class="font-body text-brand-500/80">Het deeg wordt langzaam gekneed, enkel in de mengstand, Fase 1, om de glutenstructuur rustig te laten ontwikkelen. Een massage in plaats van een bokswedstrijd.</p>
+        </div>
+        <div class="text-center fade-in">
+          <div class="w-20 h-20 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span class="font-display text-4xl font-bold text-brand-500">3</span>
+          </div>
+          <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Geduldige Fermentatie</h3>
+          <p class="font-body text-brand-500/80">Het dagelijks brood krijgt een lange rijstijd van ongeveer 18-24 uur, wat zorgt voor een rijke, diepe en unieke smaak en een lekkere structuur.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brand-700 py-16">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-12">
+        <div><img src="images/logo-main.png" alt="BRodijnen" class="h-16 mb-4 brightness-200"><p class="font-body text-white/60 text-sm">Ambachtelijk desembrood, dagelijks vers.</p></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Pagina's</h4><ul class="space-y-2 font-body text-sm text-white/60"><li><a href="over-ons.html" class="hover:text-white transition-colors duration-200 cursor-pointer">Over Ons</a></li><li><a href="molen-horeca.html" class="hover:text-white transition-colors duration-200 cursor-pointer">Molen & Horeca</a></li><li><a href="galerij.html" class="hover:text-white transition-colors duration-200 cursor-pointer">Galerij</a></li><li><a href="contact.html" class="hover:text-white transition-colors duration-200 cursor-pointer">Contact</a></li></ul></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Nijmegen</h4><ul class="space-y-2 font-body text-sm text-white/60"><li>Lange Hezelstraat 31</li><li>06 23 95 49 90</li><li>Wo – Za: 09:00 – 16:00</li></ul></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Ravenstein</h4><ul class="space-y-2 font-body text-sm text-white/60"><li>Molensingel 6</li><li>06 53 47 25 05</li><li>Wo – Za: 10:00 – 16:00 | Zo: 09:00 – 18:00</li></ul></div>
+      </div>
+      <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="font-body text-white/40 text-sm">© 2026 BRodijnen</p>
+        <p class="font-body text-white/30 text-xs">Gebouwd door <a href="https://www.code-lieshout.nl" class="hover:text-white/60 transition-colors duration-200 cursor-pointer">Code Lieshout</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('hidden'); document.getElementById('mobileMenu').classList.add('flex'); });
+    document.getElementById('menuClose').addEventListener('click', () => { document.getElementById('mobileMenu').classList.add('hidden'); document.getElementById('mobileMenu').classList.remove('flex'); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Molen & Horeca — BRodijnen Ravenstein</title>
+  <meta name="description" content="BRodijnen in Molen de Nijverheid, Ravenstein. Bakkerij, lunchlokaal, streekwinkel en evenementenlocatie.">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://analytics.code-lieshout.nl/script.js" data-website-id="0643bb7f-b319-4101-8ca1-811400d356be"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cabin:wght@400;500;600;700&display=swap');
+    html { scroll-behavior: smooth; }
+    .grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .block-hover { transition: transform 200ms ease, box-shadow 200ms ease; }
+    .block-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(120,53,15,0.15); }
+  </style>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { 'brand': { 50: '#FEF3C7', 100: '#FDE68A', 200: '#FCD34D', 300: '#d4b73f', 400: '#B45309', 500: '#92400E', 600: '#78350F', 700: '#451a03' }, 'cream': '#FEF3C7', 'warm': '#FFFBEB' },
+      fontFamily: { display: ['Amatic SC', 'cursive'], body: ['Cabin', 'sans-serif'] }
+    }}}
+  </script>
+</head>
+<body class="font-body text-brand-600 bg-warm grain">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-brand-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
+      <a href="index.html"><img src="images/logo-main.png" alt="BRodijnen" class="h-10 md:h-14"></a>
+      <div class="hidden md:flex items-center gap-8 font-body font-medium text-sm">
+        <a href="index.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Home</a>
+        <a href="over-ons.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Over Ons</a>
+        <a href="molen-horeca.html" class="text-brand-500 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Molen & Horeca</a>
+        <a href="galerij.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Galerij</a>
+        <a href="contact.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Contact</a>
+        <a href="https://www.brodijnen.nl/webshop/" target="_blank" class="bg-brand-500 text-white px-5 py-2.5 rounded-lg hover:bg-brand-400 transition-colors duration-200 cursor-pointer font-semibold">Bestel Online</a>
+      </div>
+      <button id="menuBtn" class="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer" aria-label="Menu"><svg class="w-7 h-7 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </nav>
+  <div id="mobileMenu" class="fixed inset-0 z-[60] bg-brand-600/95 backdrop-blur-lg hidden flex-col items-center justify-center gap-8">
+    <button id="menuClose" class="absolute top-5 right-5 min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    <a href="index.html" class="font-display text-4xl text-white cursor-pointer">Home</a>
+    <a href="over-ons.html" class="font-display text-4xl text-white cursor-pointer">Over Ons</a>
+    <a href="molen-horeca.html" class="font-display text-4xl text-white cursor-pointer">Molen & Horeca</a>
+    <a href="galerij.html" class="font-display text-4xl text-white cursor-pointer">Galerij</a>
+    <a href="contact.html" class="font-display text-4xl text-white cursor-pointer">Contact</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="relative pt-20 md:pt-24">
+    <img src="images/molen-panorama.jpg" alt="Molen de Nijverheid Ravenstein" class="w-full h-[50vh] object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-brand-700/80 to-transparent flex items-end">
+      <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 pb-12 w-full">
+        <h1 class="font-display text-6xl md:text-8xl font-bold text-white">Molen de Nijverheid</h1>
+        <p class="font-body text-lg text-white/80 mt-2">Waar ambacht en smaak samenkomen in Ravenstein</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 fade-in">
+      <p class="font-body text-lg text-brand-500/80 leading-relaxed">
+        De Molen van Ravenstein, bekend als de Nijverheid, is een plek waar traditie en vakmanschap samenkomen. Hier, in het hart van de molen, hebben bakkers, brouwers en molenaars hun ambachten verenigd. Elke zaterdagmiddag openen de molenaars de deuren voor bezoekers, terwijl de brouwer zijn ambachtelijke bieren brouwt. Onze bakkerij bakt dagelijks vers brood, met als hoogtepunt het bakken in de ouderwetse houtoven op zaterdag.
+      </p>
+    </div>
+  </section>
+
+  <!-- Diensten -->
+  <section class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <h2 class="font-display text-5xl md:text-7xl font-bold text-brand-600 text-center mb-16 fade-in">Onze Diensten</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+
+        <!-- Bakkerij -->
+        <div class="bg-warm rounded-2xl overflow-hidden block-hover fade-in">
+          <img src="images/bakery-action1.jpg" alt="Ambachtelijke bakkerij" class="w-full h-56 object-cover" loading="lazy">
+          <div class="p-8">
+            <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Ambachtelijke Bakkerij</h3>
+            <p class="font-body text-brand-500/80 text-sm leading-relaxed">Dagelijks vers gebakken desembrood en andere lekkernijen. Gebakken met meel van Molens, enkel natuurlijke ingrediënten, vrij van toegevoegde suikers en hulpmiddelen.</p>
+          </div>
+        </div>
+
+        <!-- Lunchlokaal -->
+        <div class="bg-warm rounded-2xl overflow-hidden block-hover fade-in">
+          <img src="images/lunch-slide1.png" alt="Lunchlokaal De Bastion" class="w-full h-56 object-cover" loading="lazy">
+          <div class="p-8">
+            <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Lunchlokaal De Bastion</h3>
+            <p class="font-body text-brand-500/80 text-sm leading-relaxed">Geniet van belegde broodjes, koffie met gebak, of speciaalbieren van Wilskracht. Mooi terras aan de voorkant zodra de zon het toelaat.</p>
+            <div class="mt-4 space-y-1 text-sm font-body text-brand-500/60">
+              <p>Wo – Vr: 10:00 – 17:00 | Za – Zo: 09:00 – 18:00</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Streekwinkel -->
+        <div class="bg-warm rounded-2xl overflow-hidden block-hover fade-in">
+          <img src="images/kerstpakket.jpg" alt="Streekwinkel" class="w-full h-56 object-cover" loading="lazy">
+          <div class="p-8">
+            <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Streekwinkel</h3>
+            <p class="font-body text-brand-500/80 text-sm leading-relaxed">Van jammetjes en chutneys tot gemberdrank en speciaalbier. Onze streekwinkel biedt een scala aan lokale producten voor een smakelijke ontdekkingsreis.</p>
+          </div>
+        </div>
+
+        <!-- Groepen & Partijen -->
+        <div class="bg-warm rounded-2xl overflow-hidden block-hover fade-in">
+          <img src="images/molen-interior2.jpg" alt="Evenementenruimte" class="w-full h-56 object-cover" loading="lazy">
+          <div class="p-8">
+            <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Feesten & Vergaderen</h3>
+            <p class="font-body text-brand-500/80 text-sm leading-relaxed">Organiseer uw evenement in de unieke ambiance van de Molen. Van intieme feestjes tot bedrijfsborrels, met beamer voor presentaties en stadswandeling door Ravenstein.</p>
+          </div>
+        </div>
+
+        <!-- Relatiegeschenken -->
+        <div class="bg-warm rounded-2xl overflow-hidden block-hover fade-in">
+          <img src="images/relatiegeschenken-hero.jpg" alt="Regionale relatiegeschenken" class="w-full h-56 object-cover" loading="lazy">
+          <div class="p-8">
+            <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Relatiegeschenken</h3>
+            <p class="font-body text-brand-500/80 text-sm leading-relaxed">Diverse relatiegeschenken met delicatessen uit de regio. Maatwerk en grote aantallen mogelijk. Ideaal voor bedrijfsfeesten en kerstpakketten.</p>
+          </div>
+        </div>
+
+        <!-- E-Cursus -->
+        <div class="bg-warm rounded-2xl overflow-hidden block-hover fade-in">
+          <img src="images/the-bakr.png" alt="E-Cursus broodbakken" class="w-full h-56 object-cover" loading="lazy">
+          <div class="p-8">
+            <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">E-Cursus Broodbakken</h3>
+            <p class="font-body text-brand-500/80 text-sm leading-relaxed">Bak het perfecte desembrood thuis. Praktische online cursus met video's, recepten en persoonlijke tips. Geen ervaring nodig, eenmalige aanschaf.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Streekpartners -->
+  <section class="py-20 md:py-28 bg-cream grain">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <h2 class="font-display text-5xl md:text-7xl font-bold text-brand-600 text-center mb-6 fade-in">Onze Streekpartners</h2>
+      <p class="font-body text-lg text-brand-500/80 text-center max-w-3xl mx-auto mb-16 fade-in">Samen met lokale partners brengen we de beste streekproducten bij elkaar.</p>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
+        <div class="fade-in"><div class="w-16 h-16 bg-brand-500 rounded-full mx-auto mb-3 flex items-center justify-center"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></div><p class="font-body text-sm font-semibold text-brand-600">De Nijverheid</p><p class="font-body text-xs text-brand-500/60">Speltgraan</p></div>
+        <div class="fade-in"><div class="w-16 h-16 bg-brand-500 rounded-full mx-auto mb-3 flex items-center justify-center"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg></div><p class="font-body text-sm font-semibold text-brand-600">Boslekker</p><p class="font-body text-xs text-brand-500/60">Chutneys & Jams</p></div>
+        <div class="fade-in"><div class="w-16 h-16 bg-brand-500 rounded-full mx-auto mb-3 flex items-center justify-center"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg></div><p class="font-body text-sm font-semibold text-brand-600">Wijchense Molen</p><p class="font-body text-xs text-brand-500/60">Tarwemeel</p></div>
+        <div class="fade-in"><div class="w-16 h-16 bg-brand-500 rounded-full mx-auto mb-3 flex items-center justify-center"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div><p class="font-body text-sm font-semibold text-brand-600">Wilskracht</p><p class="font-body text-xs text-brand-500/60">Speciaalbieren</p></div>
+        <div class="fade-in"><div class="w-16 h-16 bg-brand-500 rounded-full mx-auto mb-3 flex items-center justify-center"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><p class="font-body text-sm font-semibold text-brand-600">YoFelix</p><p class="font-body text-xs text-brand-500/60">Gemberdrank</p></div>
+        <div class="fade-in"><div class="w-16 h-16 bg-brand-300 rounded-full mx-auto mb-3 flex items-center justify-center"><svg class="w-8 h-8 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg></div><p class="font-body text-sm font-semibold text-brand-600">En meer...</p><p class="font-body text-xs text-brand-500/60">Lokale producten</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 md:py-28 bg-brand-500">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 text-center fade-in">
+      <h2 class="font-display text-5xl md:text-7xl font-bold text-white mb-6">Bezoek de Molen</h2>
+      <p class="font-body text-lg text-white/80 mb-10">Molensingel 6, 5371 AW Ravenstein · 06 53 47 25 05</p>
+      <a href="contact.html" class="bg-brand-200 text-brand-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-brand-100 transition-colors duration-200 cursor-pointer inline-block min-h-[44px]">Neem Contact Op</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brand-700 py-16">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-12">
+        <div><img src="images/logo-main.png" alt="BRodijnen" class="h-16 mb-4 brightness-200"><p class="font-body text-white/60 text-sm">Ambachtelijk desembrood, dagelijks vers.</p></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Pagina's</h4><ul class="space-y-2 font-body text-sm text-white/60"><li><a href="over-ons.html" class="hover:text-white cursor-pointer">Over Ons</a></li><li><a href="molen-horeca.html" class="hover:text-white cursor-pointer">Molen & Horeca</a></li><li><a href="galerij.html" class="hover:text-white cursor-pointer">Galerij</a></li><li><a href="contact.html" class="hover:text-white cursor-pointer">Contact</a></li></ul></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Nijmegen</h4><ul class="space-y-2 font-body text-sm text-white/60"><li>Lange Hezelstraat 31</li><li>06 23 95 49 90</li><li>Wo – Za: 09:00 – 16:00</li></ul></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Ravenstein</h4><ul class="space-y-2 font-body text-sm text-white/60"><li>Molensingel 6</li><li>06 53 47 25 05</li><li>Wo – Za: 10:00 – 16:00 | Zo: 09:00 – 18:00</li></ul></div>
+      </div>
+      <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="font-body text-white/40 text-sm">© 2026 BRodijnen</p>
+        <p class="font-body text-white/30 text-xs">Gebouwd door <a href="https://www.code-lieshout.nl" class="hover:text-white/60 cursor-pointer">Code Lieshout</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('hidden'); document.getElementById('mobileMenu').classList.add('flex'); });
+    document.getElementById('menuClose').addEventListener('click', () => { document.getElementById('mobileMenu').classList.add('hidden'); document.getElementById('mobileMenu').classList.remove('flex'); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

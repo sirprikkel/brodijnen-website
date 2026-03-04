@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerij — BRodijnen</title>
+  <meta name="description" content="Sfeerimpressie van BRodijnen — ambachtelijke desembakkerij in Nijmegen en Molen de Nijverheid in Ravenstein.">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://analytics.code-lieshout.nl/script.js" data-website-id="0643bb7f-b319-4101-8ca1-811400d356be"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cabin:wght@400;500;600;700&display=swap');
+    html { scroll-behavior: smooth; }
+    .grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-height: 90vh; max-width: 90vw; object-fit: contain; border-radius: 8px; }
+    .lightbox-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 32px; cursor: pointer; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 48px; cursor: pointer; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); border-radius: 50%; }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+  </style>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { 'brand': { 50: '#FEF3C7', 100: '#FDE68A', 200: '#FCD34D', 300: '#d4b73f', 400: '#B45309', 500: '#92400E', 600: '#78350F', 700: '#451a03' }, 'cream': '#FEF3C7', 'warm': '#FFFBEB' },
+      fontFamily: { display: ['Amatic SC', 'cursive'], body: ['Cabin', 'sans-serif'] }
+    }}}
+  </script>
+</head>
+<body class="font-body text-brand-600 bg-warm grain">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-brand-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
+      <a href="index.html"><img src="images/logo-main.png" alt="BRodijnen" class="h-10 md:h-14"></a>
+      <div class="hidden md:flex items-center gap-8 font-body font-medium text-sm">
+        <a href="index.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Home</a>
+        <a href="over-ons.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Over Ons</a>
+        <a href="molen-horeca.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Molen & Horeca</a>
+        <a href="galerij.html" class="text-brand-500 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Galerij</a>
+        <a href="contact.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Contact</a>
+        <a href="https://www.brodijnen.nl/webshop/" target="_blank" class="bg-brand-500 text-white px-5 py-2.5 rounded-lg hover:bg-brand-400 transition-colors duration-200 cursor-pointer font-semibold">Bestel Online</a>
+      </div>
+      <button id="menuBtn" class="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer" aria-label="Menu"><svg class="w-7 h-7 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </nav>
+  <div id="mobileMenu" class="fixed inset-0 z-[60] bg-brand-600/95 backdrop-blur-lg hidden flex-col items-center justify-center gap-8">
+    <button id="menuClose" class="absolute top-5 right-5 min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    <a href="index.html" class="font-display text-4xl text-white cursor-pointer">Home</a>
+    <a href="over-ons.html" class="font-display text-4xl text-white cursor-pointer">Over Ons</a>
+    <a href="molen-horeca.html" class="font-display text-4xl text-white cursor-pointer">Molen & Horeca</a>
+    <a href="galerij.html" class="font-display text-4xl text-white cursor-pointer">Galerij</a>
+    <a href="contact.html" class="font-display text-4xl text-white cursor-pointer">Contact</a>
+  </div>
+
+  <!-- Header -->
+  <section class="pt-24 md:pt-32 pb-12 bg-brand-500">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 text-center">
+      <h1 class="font-display text-6xl md:text-8xl font-bold text-white mb-4">Galerij</h1>
+      <p class="font-body text-lg text-white/80">Een kijkje in de bakkerij, de molen en onze producten</p>
+    </div>
+  </section>
+
+  <!-- Gallery Grid -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div id="gallery" class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(0)"><img src="images/hero-bread.jpg" alt="Vers desembrood" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(1)"><img src="images/erik-portrait.jpg" alt="Erik van Rodijnen" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(2)"><img src="images/bakery-action1.jpg" alt="In de bakkerij" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(3)"><img src="images/bakery-action2.jpg" alt="Brood bakken" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(4)"><img src="images/bakery-action3.jpg" alt="Bakkerij actie" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(5)"><img src="images/molen-exterior.jpg" alt="Molen de Nijverheid" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(6)"><img src="images/molen-interior1.jpg" alt="Molen interieur" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(7)"><img src="images/molen-interior2.jpg" alt="Molen interieur" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(8)"><img src="images/molen-interior3.jpg" alt="Molen interieur" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(9)"><img src="images/molen-panorama.jpg" alt="Molen panorama" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(10)"><img src="images/molen-scene.jpg" alt="Molen scene" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(11)"><img src="images/molen-detail1.jpg" alt="Molen detail" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(12)"><img src="images/baking1.jpg" alt="Vers brood" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(13)"><img src="images/baking2.jpg" alt="Bakproces" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(14)"><img src="images/google/google_place_1.jpg" alt="BRodijnen Nijmegen" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(15)"><img src="images/google/google_place_2.jpg" alt="BRodijnen producten" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(16)"><img src="images/google/google_place_3.jpg" alt="BRodijnen winkel" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(17)"><img src="images/google/google_place_4.jpg" alt="BRodijnen" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(18)"><img src="images/kerstpakket.jpg" alt="Kerstpakket" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(19)"><img src="images/bierpakket.jpg" alt="Bierpakket Wilskracht" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(20)"><img src="images/meel-molen.jpg" alt="Meel van de Wijchense Molen" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+        <div class="break-inside-avoid overflow-hidden rounded-xl cursor-pointer fade-in" onclick="openLB(21)"><img src="images/erik-instagram.png" alt="Erik op Instagram" class="w-full hover:scale-105 transition-transform duration-300" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close" onclick="closeLB()">&times;</span>
+    <span class="lightbox-nav lightbox-prev" onclick="navLB(-1)">&#8249;</span>
+    <img id="lb-img" src="" alt="">
+    <span class="lightbox-nav lightbox-next" onclick="navLB(1)">&#8250;</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-brand-700 py-16">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-12">
+        <div><img src="images/logo-main.png" alt="BRodijnen" class="h-16 mb-4 brightness-200"><p class="font-body text-white/60 text-sm">Ambachtelijk desembrood, dagelijks vers.</p></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Pagina's</h4><ul class="space-y-2 font-body text-sm text-white/60"><li><a href="over-ons.html" class="hover:text-white cursor-pointer">Over Ons</a></li><li><a href="molen-horeca.html" class="hover:text-white cursor-pointer">Molen & Horeca</a></li><li><a href="galerij.html" class="hover:text-white cursor-pointer">Galerij</a></li><li><a href="contact.html" class="hover:text-white cursor-pointer">Contact</a></li></ul></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Nijmegen</h4><ul class="space-y-2 font-body text-sm text-white/60"><li>Lange Hezelstraat 31</li><li>06 23 95 49 90</li></ul></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Ravenstein</h4><ul class="space-y-2 font-body text-sm text-white/60"><li>Molensingel 6</li><li>06 53 47 25 05</li></ul></div>
+      </div>
+      <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="font-body text-white/40 text-sm">© 2026 BRodijnen</p>
+        <p class="font-body text-white/30 text-xs">Gebouwd door <a href="https://www.code-lieshout.nl" class="hover:text-white/60 cursor-pointer">Code Lieshout</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('hidden'); document.getElementById('mobileMenu').classList.add('flex'); });
+    document.getElementById('menuClose').addEventListener('click', () => { document.getElementById('mobileMenu').classList.add('hidden'); document.getElementById('mobileMenu').classList.remove('flex'); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Lightbox with navigation
+    const imgs = [...document.querySelectorAll('#gallery img')].map(i => i.src);
+    let current = 0;
+    function openLB(i) { current = i; document.getElementById('lb-img').src = imgs[i]; document.getElementById('lightbox').classList.add('active'); }
+    function closeLB() { document.getElementById('lightbox').classList.remove('active'); }
+    function navLB(d) { current = (current + d + imgs.length) % imgs.length; document.getElementById('lb-img').src = imgs[current]; event.stopPropagation(); }
+    document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) closeLB(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB(); if (e.key === 'ArrowLeft') navLB(-1); if (e.key === 'ArrowRight') navLB(1); });
+  </script>
+</body>
+</html>
