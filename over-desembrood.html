@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Over Desembrood — BRodijnen</title>
+  <meta name="description" content="Ontdek de voordelen van ambachtelijk desembrood. Gezonder, voedzamer en economisch voordeliger dan regulier brood.">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://analytics.code-lieshout.nl/script.js" data-website-id="0643bb7f-b319-4101-8ca1-811400d356be"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cabin:wght@400;500;600;700&display=swap');
+    html { scroll-behavior: smooth; }
+    .grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .block-hover { transition: transform 200ms ease, box-shadow 200ms ease; }
+    .block-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(120,53,15,0.15); }
+  </style>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { 'brand': { 50: '#FEF3C7', 100: '#FDE68A', 200: '#FCD34D', 300: '#d4b73f', 400: '#B45309', 500: '#92400E', 600: '#78350F', 700: '#451a03' }, 'cream': '#FEF3C7', 'warm': '#FFFBEB' },
+      fontFamily: { display: ['Amatic SC', 'cursive'], body: ['Cabin', 'sans-serif'] }
+    }}}
+  </script>
+</head>
+<body class="font-body text-brand-600 bg-warm grain">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-brand-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
+      <a href="index.html"><img src="images/logo-main.png" alt="BRodijnen" class="h-10 md:h-14"></a>
+      <div class="hidden md:flex items-center gap-8 font-body font-medium text-sm">
+        <a href="index.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Home</a>
+        <a href="over-ons.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Over Ons</a>
+        <a href="over-desembrood.html" class="text-brand-500 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Over Desembrood</a>
+        <a href="molen-horeca.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Molen & Horeca</a>
+        <a href="galerij.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Galerij</a>
+        <a href="kennis.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Kennis</a>
+        <a href="contact.html" class="text-brand-600 hover:text-brand-300 transition-colors duration-200 cursor-pointer">Contact</a>
+        <a href="https://www.brodijnen.nl/webshop/" target="_blank" class="bg-brand-500 text-white px-5 py-2.5 rounded-lg hover:bg-brand-400 transition-colors duration-200 cursor-pointer font-semibold">Bestel Online</a>
+      </div>
+      <button id="menuBtn" class="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer" aria-label="Menu"><svg class="w-7 h-7 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </nav>
+  <div id="mobileMenu" class="fixed inset-0 z-[60] bg-brand-600/95 backdrop-blur-lg hidden flex-col items-center justify-center gap-6">
+    <button id="menuClose" class="absolute top-5 right-5 min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    <a href="index.html" class="font-display text-4xl text-white cursor-pointer">Home</a>
+    <a href="over-ons.html" class="font-display text-4xl text-white cursor-pointer">Over Ons</a>
+    <a href="over-desembrood.html" class="font-display text-4xl text-white cursor-pointer">Over Desembrood</a>
+    <a href="molen-horeca.html" class="font-display text-4xl text-white cursor-pointer">Molen & Horeca</a>
+    <a href="galerij.html" class="font-display text-4xl text-white cursor-pointer">Galerij</a>
+    <a href="kennis.html" class="font-display text-4xl text-white cursor-pointer">Kennis</a>
+    <a href="contact.html" class="font-display text-4xl text-white cursor-pointer">Contact</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="pt-24 md:pt-32 pb-16 bg-brand-500">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 text-center">
+      <h1 class="font-display text-6xl md:text-8xl font-bold text-white mb-4">Over Desembrood</h1>
+      <p class="font-body text-lg text-white/80 max-w-2xl mx-auto">Ontdek de voordelen van ambachtelijk desembrood — niet alleen voedzaam, maar ook een slimme belegging in je dagelijkse brood.</p>
+    </div>
+  </section>
+
+  <!-- Wat is Desembrood -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="fade-in">
+        <h2 class="font-display text-5xl md:text-7xl font-bold text-brand-600 mb-8">Wat is Desembrood?</h2>
+        <p class="font-body text-lg text-brand-500/80 leading-relaxed mb-6">
+          Desembrood is een traditioneel brood dat, oorspronkelijk, wordt gemaakt zonder gebruik van commerciële gist. In plaats daarvan wordt het deeg gefermenteerd met een natuurlijke starter, bestaande uit bloem en water, die de tijd krijgt om te fermenteren en wilde gisten te creëren.
+        </p>
+        <p class="font-body text-lg text-brand-500/80 leading-relaxed">
+          Dit proces geeft desembrood zijn karakteristieke smaak en textuur. In tegenstelling tot gewoon brood, dat vaak snel wordt geproduceerd met toevoegingen, is desembrood rijk aan voedingsstoffen en heeft het een langere houdbaarheid. Het verschil zit hem in de eenvoud en de tijd die het deeg krijgt om te ontwikkelen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Geschiedenis Timeline -->
+  <section class="py-20 md:py-28 bg-white">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8">
+      <h2 class="font-display text-5xl md:text-7xl font-bold text-brand-600 mb-16 text-center fade-in">De Geschiedenis</h2>
+      <div class="space-y-12">
+        <div class="flex gap-6 fade-in">
+          <div class="flex flex-col items-center">
+            <div class="w-14 h-14 bg-brand-500 rounded-full flex items-center justify-center text-white font-bold text-xs shrink-0 font-body">3000<br>v.Chr.</div>
+            <div class="w-0.5 bg-brand-200 flex-1 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h3 class="font-display text-2xl font-bold text-brand-600">Oorsprong in het Oude Egypte</h3>
+            <p class="font-body text-brand-500/80 mt-2">De eerste sporen van desembrood werden gevonden in het oude Egypte, waar bakkers ontdekten dat gefermenteerd deeg een heerlijke smaak en textuur gaf.</p>
+          </div>
+        </div>
+        <div class="flex gap-6 fade-in">
+          <div class="flex flex-col items-center">
+            <div class="w-14 h-14 bg-brand-500 rounded-full flex items-center justify-center text-white font-bold text-xs shrink-0 font-body">500<br>v.Chr.</div>
+            <div class="w-0.5 bg-brand-200 flex-1 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h3 class="font-display text-2xl font-bold text-brand-600">Verspreiding naar Europa</h3>
+            <p class="font-body text-brand-500/80 mt-2">Met de opkomst van handel verspreidde het gebruik van desem zich naar Griekenland en Rome, waar het een geliefd onderdeel van de dagelijkse maaltijd werd.</p>
+          </div>
+        </div>
+        <div class="flex gap-6 fade-in">
+          <div class="flex flex-col items-center">
+            <div class="w-14 h-14 bg-brand-500 rounded-full flex items-center justify-center text-white font-bold text-xs shrink-0 font-body">1800</div>
+            <div class="w-0.5 bg-brand-200 flex-1 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h3 class="font-display text-2xl font-bold text-brand-600">Industriële Revolutie</h3>
+            <p class="font-body text-brand-500/80 mt-2">De komst van commerciële gist veranderde de bakkerij-industrie, maar desembrood bleef populair onder liefhebbers van traditioneel brood.</p>
+          </div>
+        </div>
+        <div class="flex gap-6 fade-in">
+          <div class="flex flex-col items-center">
+            <div class="w-14 h-14 bg-brand-500 rounded-full flex items-center justify-center text-white font-bold text-xs shrink-0 font-body">1970</div>
+            <div class="w-0.5 bg-brand-200 flex-1 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h3 class="font-display text-2xl font-bold text-brand-600">Heropleving van Ambachtelijk Brood</h3>
+            <p class="font-body text-brand-500/80 mt-2">In de jaren '70 begon een hernieuwde interesse in ambachtelijk brood, met een focus op kwaliteit en natuurlijke ingrediënten.</p>
+          </div>
+        </div>
+        <div class="flex gap-6 fade-in">
+          <div class="flex flex-col items-center">
+            <div class="w-14 h-14 bg-brand-300 rounded-full flex items-center justify-center text-brand-700 font-bold text-xs shrink-0 font-body">2020</div>
+          </div>
+          <div>
+            <h3 class="font-display text-2xl font-bold text-brand-600">BRodijnen: Een Moderne Traditie</h3>
+            <p class="font-body text-brand-500/80 mt-2">BRodijnen Desembakkerij opent zijn deuren, met een toewijding aan het maken van authentiek desembrood dat voedt en verbindt.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gezondheidsvoordelen -->
+  <section class="py-20 md:py-28 bg-cream grain">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <h2 class="font-display text-5xl md:text-7xl font-bold text-brand-600 text-center mb-16 fade-in">Gezondheidsvoordelen</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div class="bg-white rounded-xl p-8 block-hover fade-in text-center">
+          <div class="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Probiotica</h3>
+          <p class="font-body text-brand-500/80 text-sm leading-relaxed">Bevat natuurlijke probiotica die de darmflora ondersteunen en de spijsvertering bevorderen.</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 block-hover fade-in text-center">
+          <div class="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Voedingsstoffen</h3>
+          <p class="font-body text-brand-500/80 text-sm leading-relaxed">Dankzij het langdurige fermentatieproces behoudt desembrood meer mineralen en vitamines.</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 block-hover fade-in text-center">
+          <div class="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Verzadigend</h3>
+          <p class="font-body text-brand-500/80 text-sm leading-relaxed">De complexe koolhydraten zorgen voor een langdurig verzadigd gevoel, waardoor je minder snel weer honger hebt.</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 block-hover fade-in text-center">
+          <div class="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <h3 class="font-display text-3xl font-bold text-brand-600 mb-3">Lage Glycemische Index</h3>
+          <p class="font-body text-brand-500/80 text-sm leading-relaxed">Helpt bij het stabiliseren van de bloedsuikerspiegel dankzij een lagere glycemische index.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Economisch Voordelig -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="fade-in">
+          <img src="images/baking2.jpg" alt="Desembrood" class="rounded-2xl shadow-lg w-full" loading="lazy">
+        </div>
+        <div class="fade-in">
+          <h2 class="font-display text-5xl font-bold text-brand-600 mb-6">Economisch Voordelig</h2>
+          <p class="font-body text-lg text-brand-500/80 leading-relaxed mb-4">
+            Desembrood is niet alleen een gezonde keuze, maar ook een slimme financiële beslissing. Door de hogere voedingswaarde en het verzadigende effect heb je minder sneetjes nodig om vol te raken.
+          </p>
+          <p class="font-body text-lg text-brand-500/80 leading-relaxed">
+            Daarnaast blijft desembrood langer vers, waardoor je minder verspilling hebt. Dit maakt het een duurzame keuze voor zowel je portemonnee als het milieu. Omgekeerd beleggen met je brood — investeren in minder voor meer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="py-20 md:py-28 bg-brand-600">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <h2 class="font-display text-5xl md:text-7xl font-bold text-white text-center mb-16 fade-in">Wat Klanten Zeggen</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 fade-in">
+          <div class="flex gap-1 mb-4"><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+          <p class="font-body text-white/90 italic mb-4">"Een echte aanrader, je proeft dat de zuurdesembroden met liefde gebakken worden volgens oud vakmanschap."</p>
+          <p class="font-body text-brand-200 font-semibold text-sm">S. Schumann</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 fade-in">
+          <div class="flex gap-1 mb-4"><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+          <p class="font-body text-white/90 italic mb-4">"Wat heb ik weer lekker geluncht met een brood en krentenbollen van BRodijnen. Ik fiets er speciaal voor naar Nijmegen."</p>
+          <p class="font-body text-brand-200 font-semibold text-sm">M. van Oostendorp</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 fade-in">
+          <div class="flex gap-1 mb-4"><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-5 h-5 text-brand-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+          <p class="font-body text-white/90 italic mb-4">"Really good breads and tasty treats. Favourite bakery in town. Prices are super fair."</p>
+          <p class="font-body text-brand-200 font-semibold text-sm">M. Oostdijk</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 md:py-28 bg-brand-500">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 text-center fade-in">
+      <h2 class="font-display text-5xl md:text-7xl font-bold text-white mb-6">Proef het Zelf</h2>
+      <p class="font-body text-lg text-white/80 mb-10">Bestel online of bezoek onze winkels in Nijmegen en Ravenstein.</p>
+      <a href="https://www.brodijnen.nl/webshop/" target="_blank" class="bg-brand-200 text-brand-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-brand-100 transition-colors duration-200 cursor-pointer inline-block min-h-[44px]">Bestel Online</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brand-700 py-16">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-12">
+        <div><img src="images/logo-main.png" alt="BRodijnen" class="h-16 mb-4 brightness-200"><p class="font-body text-white/60 text-sm">Ambachtelijk desembrood, dagelijks vers.</p></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Pagina's</h4><ul class="space-y-2 font-body text-sm text-white/60"><li><a href="over-ons.html" class="hover:text-white cursor-pointer">Over Ons</a></li><li><a href="over-desembrood.html" class="hover:text-white cursor-pointer">Over Desembrood</a></li><li><a href="molen-horeca.html" class="hover:text-white cursor-pointer">Molen & Horeca</a></li><li><a href="kennis.html" class="hover:text-white cursor-pointer">Kennis</a></li><li><a href="contact.html" class="hover:text-white cursor-pointer">Contact</a></li></ul></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Nijmegen</h4><ul class="space-y-2 font-body text-sm text-white/60"><li>Lange Hezelstraat 31</li><li>06 23 95 49 90</li><li>Wo – Za: 09:00 – 16:00</li></ul></div>
+        <div><h4 class="font-display text-2xl font-bold text-white mb-4">Ravenstein</h4><ul class="space-y-2 font-body text-sm text-white/60"><li>Molensingel 6</li><li>06 53 47 25 05</li><li>Wo – Za: 10:00 – 16:00 | Zo: 09:00 – 18:00</li></ul></div>
+      </div>
+      <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="font-body text-white/40 text-sm">© 2026 BRodijnen</p>
+        <p class="font-body text-white/30 text-xs">Gebouwd door <a href="https://www.code-lieshout.nl" class="hover:text-white/60 cursor-pointer">Code Lieshout</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('hidden'); document.getElementById('mobileMenu').classList.add('flex'); });
+    document.getElementById('menuClose').addEventListener('click', () => { document.getElementById('mobileMenu').classList.add('hidden'); document.getElementById('mobileMenu').classList.remove('flex'); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
